@@ -10,10 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Your First 3D Game With Godot 4 (GDQuest)"
+config/name="RoundBattle"
 run/main_scene="res://lessons_reference/video_16/game.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.png"
 
 [audio]
 

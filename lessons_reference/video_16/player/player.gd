@@ -1,9 +1,16 @@
 extends CharacterBody3D
 
+var vida = 100
+
+@onready var health_ui = $"CanvasLayer/player_health_bar"
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	%Marker3D.rotation_degrees.y += 2.0
+	
+	# Inicializar barra de vida
+	health_ui.value = vida
 
 
 func _unhandled_input(event):
@@ -52,3 +59,22 @@ func shoot_bullet():
 
 	%Timer.start()
 	%AudioStreamPlayer.play()
+
+
+# =========================
+# ❤️ SISTEMA DE VIDA
+# =========================
+
+func recibir_daño(cantidad):
+	vida -= cantidad
+	vida = clamp(vida, 0, 100)
+
+	health_ui.value = vida
+
+	if vida <= 0:
+		morir()
+
+
+func morir():
+	print("Has muerto")
+	get_tree().reload_current_scene()
