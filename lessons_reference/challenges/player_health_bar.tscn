@@ -28,10 +28,10 @@ font_size = 68
 
 [node name="HealthBar" type="ProgressBar" unique_id=833361077]
 z_index = 100
-offset_left = 141.0
-offset_top = 39.0
-offset_right = 492.0
-offset_bottom = 100.0
+offset_left = 769.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 93.0
 theme_override_styles/background = SubResource("StyleBoxFlat_cc56i")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dhpp2")
 value = 100.0

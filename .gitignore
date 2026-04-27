@@ -1,5 +1,30 @@
-.import/
-.export/
-.export_presets.cfg
-*.tmp
+# Godot 4+ specific
+.godot/
+*.translation
+
+# Mono-specific (si no usas C#, no afecta)
+.mono/
+
+# Build/output
+export/
+build/
+
+# Autoload backups (a veces se generan)
+*.autoload_bak
+
+# Specific Godot files to ignore
 *.import
+*.godot_editor
+*.godot_import
+
+# Temporary OS files
+Thumbs.db
+.DS_Store
+
+# Godot 4 editor backups
+*.tmp
+*~
+~*
+
+# Logs
+*.log

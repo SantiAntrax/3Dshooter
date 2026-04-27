@@ -4,11 +4,23 @@
 [ext_resource type="PackedScene" uid="uid://12e7gwo50sef" path="res://lessons_reference/video_16/mob/bat/bat_model.tscn" id="2_5vr7j"]
 [ext_resource type="AudioStream" uid="uid://bec5opkuf77c7" path="res://mob/mob_take_damage.wav" id="3_sikhy"]
 [ext_resource type="AudioStream" uid="uid://ha0bp3cygkq1" path="res://mob/mob_ko.wav" id="4_qnk8k"]
+[ext_resource type="Script" uid="uid://dacsjhcf6myy6" path="res://lessons_reference/video_16/mob/enemy_state.gd" id="5_xdhm4"]
+[ext_resource type="Script" uid="uid://di7ikoxamf30w" path="res://lessons_reference/video_16/mob/idle_state.gd" id="6_drcv1"]
+[ext_resource type="Script" uid="uid://dlbgejaxrw03d" path="res://lessons_reference/video_16/mob/chase_state.gd" id="6_hccxo"]
+[ext_resource type="Script" uid="uid://dlt8unhpj4m7v" path="res://lessons_reference/video_16/mob/attack_state.gd" id="7_drcv1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gkbwe"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_3exxy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_76gk6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hccxo"]
+radius = 12.0
+
 [node name="Mob" type="RigidBody3D" unique_id=1434403069]
 top_level = true
+collision_layer = 3
 gravity_scale = 0.0
 script = ExtResource("1_ebh3x")
 
@@ -32,5 +44,47 @@ max_polyphony = 4
 unique_name_in_owner = true
 stream = ExtResource("4_qnk8k")
 max_db = -10.0
+
+[node name="DamageArea" type="Area3D" parent="." unique_id=829573556]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageArea" unique_id=1605898316]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_3exxy")
+
+[node name="StateMachine" type="Node" parent="." unique_id=100437280]
+script = ExtResource("5_xdhm4")
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=929946596]
+script = ExtResource("6_drcv1")
+
+[node name="ChaseState" type="Node" parent="StateMachine" unique_id=1972208533]
+script = ExtResource("6_hccxo")
+
+[node name="AttackState" type="Node" parent="StateMachine" unique_id=1590874668]
+script = ExtResource("7_drcv1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1021919816]
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=4148641]
+one_shot = true
+autostart = true
+
+[node name="AttackHitbox" type="Area3D" parent="." unique_id=1760673150]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox" unique_id=857254317]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_76gk6")
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=139501049]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=977462962]
+shape = SubResource("SphereShape3D_hccxo")
+
+[node name="ReactionTimer" type="Timer" parent="." unique_id=1793582922]
+one_shot = true
+
+[node name="AttackSound" type="AudioStreamPlayer3D" parent="." unique_id=1870063882]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

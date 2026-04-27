@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://xtl5acmpaa04"]
 
 [ext_resource type="Script" uid="uid://bpgxeyw3xlpvn" path="res://lessons_reference/video_16/mob/spawner_3d.gd" id="1_5kn8d"]
+[ext_resource type="PackedScene" uid="uid://dfwbq2vombjvr" path="res://lessons_reference/video_16/mob/mob.tscn" id="2_mtobb"]
 [ext_resource type="PackedScene" uid="uid://c2oal6rrmeo67" path="res://lessons_reference/video_16/mob/spawner/spawner_skin.tscn" id="2_vlo78"]
 
 [node name="MobSpawner3D" type="Node3D" unique_id=1666798673]
 script = ExtResource("1_5kn8d")
+mob_scene = ExtResource("2_mtobb")
 
 [node name="Timer" type="Timer" parent="." unique_id=1441947143]
 unique_name_in_owner = true
@@ -18,4 +20,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="Spawner" parent="." unique_id=597840737 instance=ExtResource("2_vlo78")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
+[connection signal="mob_spawned" from="." to="." method="_on_mob_spawned"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

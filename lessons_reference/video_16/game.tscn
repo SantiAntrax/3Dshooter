@@ -4,8 +4,9 @@
 [ext_resource type="Script" uid="uid://bl4rvfo6g3wbf" path="res://lessons_reference/video_16/game.gd" id="1_xym6k"]
 [ext_resource type="Material" uid="uid://spdpie6nlr1q" path="res://lessons_reference/video_16/level/bridges.tres" id="4_mc4jw"]
 [ext_resource type="PackedScene" uid="uid://xtl5acmpaa04" path="res://lessons_reference/video_16/mob/spawner_3d.tscn" id="5_7vlo8"]
-[ext_resource type="PackedScene" uid="uid://dfwbq2vombjvr" path="res://lessons_reference/video_16/mob/mob.tscn" id="5_787o4"]
 [ext_resource type="Material" uid="uid://cp4gi8r3s3twb" path="res://lessons_reference/video_16/level/platforms.tres" id="5_l41we"]
+[ext_resource type="Script" uid="uid://dstdc8ma58vqn" path="res://lessons_reference/video_16/pause_menu.gd" id="6_es74b"]
+[ext_resource type="Script" uid="uid://sgbahaffrfb2" path="res://lessons_reference/video_16/end_game_panel.gd" id="7_vsr84"]
 
 [sub_resource type="Environment" id="Environment_pev5d"]
 background_mode = 1
@@ -29,6 +30,23 @@ volumetric_fog_albedo = Color(0.203922, 0.203922, 1, 1)
 volumetric_fog_emission = Color(0.0431373, 0.0431373, 0.0431373, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xiq5r"]
+
+[sub_resource type="Theme" id="Theme_xe0c4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_es74b"]
+font_size = 120
+
+[sub_resource type="SystemFont" id="SystemFont_vsr84"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wpyi"]
+font = SubResource("SystemFont_vsr84")
+font_size = 53
+
+[sub_resource type="LabelSettings" id="LabelSettings_vsr84"]
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ve8k"]
+font_size = 53
 
 [node name="Game" type="Node3D" unique_id=1776634138]
 script = ExtResource("1_xym6k")
@@ -64,15 +82,12 @@ shape = SubResource("WorldBoundaryShape3D_xiq5r")
 
 [node name="MobSpawner3D" parent="." unique_id=1628994082 instance=ExtResource("5_7vlo8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12224, 0.5, 11.3959)
-mob_to_spawn = ExtResource("5_787o4")
 
 [node name="MobSpawner3D2" parent="." unique_id=1763726273 instance=ExtResource("5_7vlo8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7262, 0.5, 11.9995)
-mob_to_spawn = ExtResource("5_787o4")
 
 [node name="MobSpawner3D3" parent="." unique_id=1702535751 instance=ExtResource("5_7vlo8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7262, 0.5, -7.19963)
-mob_to_spawn = ExtResource("5_787o4")
 
 [node name="Bridge" type="CSGBox3D" parent="." unique_id=1080718364]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -6.5)
@@ -116,6 +131,12 @@ use_collision = true
 size = Vector3(6, 11, 14)
 material = ExtResource("5_l41we")
 
+[node name="Platform7" type="CSGBox3D" parent="." unique_id=1489783234]
+transform = Transform3D(0.999827, -0.0029794064, 0.018357417, 0.0032813866, 0.99985933, -0.016442515, -0.018305847, 0.016499912, 0.99969614, -10.808197, -5.153766, 21.092909)
+use_collision = true
+size = Vector3(6, 11, 14)
+material = ExtResource("5_l41we")
+
 [node name="Platform5" type="CSGBox3D" parent="." unique_id=913067759]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -5, 7)
 use_collision = true
@@ -128,7 +149,184 @@ use_collision = true
 size = Vector3(7, 11, 12)
 material = ExtResource("5_l41we")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1893984484]
+
+[node name="RoundLabel" type="Label" parent="CanvasLayer" unique_id=781224817]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 661.0001
+offset_top = -498.0
+offset_right = 724.0001
+offset_bottom = -475.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemiesRemainingLabel" type="Label" parent="CanvasLayer" unique_id=1875105040]
+offset_top = 17.0
+offset_right = 93.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=2146337979]
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 39.0
+offset_bottom = 48.0
+text = "Score: 0"
+
+[node name="RoundMessagePanel" type="Panel" parent="CanvasLayer" unique_id=1298462259]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xe0c4")
+
+[node name="RoundMessageLabel" type="Label" parent="CanvasLayer/RoundMessagePanel" unique_id=788137686]
+process_mode = 3
+layout_mode = 0
+offset_left = 517.0
+offset_top = 276.0
+offset_right = 818.3334
+offset_bottom = 361.6667
+scale = Vector2(3, 3)
+text = "
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextRoundButton" type="Button" parent="CanvasLayer/RoundMessagePanel" unique_id=626718826]
+process_mode = 3
+layout_mode = 0
+offset_left = 855.0
+offset_top = 738.0
+offset_right = 1066.0
+offset_bottom = 798.0
+text = "Siguiente Ronda"
+
+[node name="PausePanel" type="Panel" parent="CanvasLayer" unique_id=1646977631]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_es74b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PausePanel" unique_id=316165077]
+process_mode = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=1518100759]
+process_mode = 3
+layout_mode = 2
+text = "Pausa"
+
+[node name="Reanudar" type="Button" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=2002728074]
+process_mode = 3
+layout_mode = 2
+text = "Reanudar"
+
+[node name="Reiniciar" type="Button" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=2026152045]
+process_mode = 3
+layout_mode = 2
+text = "Reiniciar"
+
+[node name="SalirMenu" type="Button" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=1381333196]
+process_mode = 3
+layout_mode = 2
+text = "Salir Al Menu
+"
+
+[node name="GameOverPanel" type="Panel" parent="CanvasLayer" unique_id=1257375571]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_vsr84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverPanel" unique_id=1273199869]
+layout_direction = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1877808819]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_es74b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=816060218]
+layout_mode = 2
+text = "Score: 0
+"
+label_settings = SubResource("LabelSettings_3wpyi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1270958088]
+layout_mode = 2
+text = "Reintentar
+"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1705374127]
+layout_mode = 2
+text = "Menu Principal
+"
+
+[node name="VictoryPanel" type="Panel" parent="CanvasLayer" unique_id=1630525092]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_vsr84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VictoryPanel" unique_id=165369498]
+layout_direction = 1
+layout_mode = 0
+offset_right = 1914.0
+offset_bottom = 1075.0
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=262019890]
+layout_mode = 2
+text = "¡VICTORIA!"
+label_settings = SubResource("LabelSettings_vsr84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=1473197728]
+layout_mode = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_6ve8k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=1721027899]
+layout_mode = 2
+text = "Jugar De Nuevo
+"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=1787534075]
+layout_mode = 2
+text = "Menu Principal"
+
 [connection signal="body_entered" from="KillPlane" to="." method="_on_kill_plane_body_entered"]
-[connection signal="mob_spawned" from="MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]
-[connection signal="mob_spawned" from="MobSpawner3D2" to="." method="_on_mob_spawner_3d_mob_spawned"]
-[connection signal="mob_spawned" from="MobSpawner3D3" to="." method="_on_mob_spawner_3d_mob_spawned"]

@@ -11,12 +11,16 @@ config_version=5
 [application]
 
 config/name="RoundBattle"
-run/main_scene="res://lessons_reference/video_16/game.tscn"
+run/main_scene="uid://n3jkx4ndojej"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [audio]
 
 buses/default_bus_layout=""
+
+[autoload]
+
+RoundManager="*uid://dmjixgxn0faaa"
 
 [display]
 
@@ -68,3 +72,4 @@ shoot={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
