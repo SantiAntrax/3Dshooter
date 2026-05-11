@@ -40,6 +40,7 @@ one_shot = true
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=22888132]
 
 [node name="player_health_bar" parent="CanvasLayer" unique_id=833361077 instance=ExtResource("5_y8jjm")]
+top_level = true
 offset_left = 350.0
 offset_right = 730.0
 

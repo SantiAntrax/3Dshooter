@@ -27,6 +27,7 @@ corner_radius_bottom_left = 20
 font_size = 68
 
 [node name="HealthBar" type="ProgressBar" unique_id=833361077]
+top_level = true
 z_index = 100
 offset_left = 769.0
 offset_top = 32.0

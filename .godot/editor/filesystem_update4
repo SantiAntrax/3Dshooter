@@ -1,12 +1,6 @@
+res://TouchUI.tscn
 res://player/projectile/projectile.gdshader
 res://level/sky.gdshader
-res://MainMenu.tscn
-res://main_menu.gd
-res://lessons_reference/video_16/game.tscn
-res://lessons_reference/video_16/pause_menu.gd
-res://lessons_reference/video_16/game.gd
 res://lessons_reference/video_16/player/player.gd
+res://lessons_reference/video_16/player/player.tscn
 res://lessons_reference/challenges/player_health_bar.tscn
-res://lessons_reference/video_16/end_game_panel.gd
-res://round_manager.gd
-res://lessons_reference/video_16/mob/spawner_3d.gd
