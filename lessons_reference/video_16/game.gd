@@ -15,7 +15,9 @@ extends Node3D
 # Panel de pausa
 @onready var pause_panel: Panel = $CanvasLayer/PausePanel
 
-var player_score = 0
+# ✅ Eliminamos la variable local player_score, usaremos RoundManager.current_score
+# var player_score = 0  ← ELIMINAR
+
 var is_paused: bool = false
 var game_ended: bool = false
 
@@ -35,7 +37,11 @@ func _ready():
 	RoundManager.reset_rounds()
 	RoundManager.setup_ui(round_label, enemies_label, message_panel, message_label, next_button)
 	RoundManager.start_new_round()
-	update_score()
+	
+	# ✅ Conectar la señal de score del RoundManager
+	RoundManager.score_updated.connect(_on_score_updated)
+	# ✅ Inicializar el score en la UI
+	_on_score_updated(RoundManager.current_score)
 
 	# Conectar señales de RoundManager para manejar pausa/ratón entre rondas
 	RoundManager.round_message_show.connect(_on_round_message_show)
@@ -63,13 +69,18 @@ func _connect_end_panels():
 	victory_panel.retry_pressed.connect(_retry)
 	victory_panel.menu_pressed.connect(_go_to_main_menu)
 
+# ✅ Nueva función que actualiza el label del score
+func _on_score_updated(new_score: int):
+	if score_label:
+		score_label.text = "Score: " + str(new_score)
+
 # --- Manejo de pausa/ratón para mensajes de ronda ---
 func _on_round_message_show(_msg: String):
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_round_message_hide():
-	message_panel.visible = false   # ✅ Oculta el panel de "Siguiente Ronda"
+	message_panel.visible = false   # Oculta el panel de "Siguiente Ronda"
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -104,7 +115,8 @@ func _on_pause_restart():
 
 func _on_pause_quit():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://lessons_reference/video_16/main_menu.tscn")
+	# Ajusta la ruta a tu menú principal real
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
 
 # --- Fin de juego ---
 func _on_player_died():
@@ -120,7 +132,8 @@ func _on_victory():
 func show_end_panel(panel: Panel):
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	panel.set_score(player_score)
+	# ✅ Usar el score real del RoundManager
+	panel.set_score(RoundManager.current_score)
 	panel.visible = true
 	pause_panel.visible = false
 
@@ -130,16 +143,13 @@ func _retry():
 
 func _go_to_main_menu():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://lessons_reference/video_16/main_menu.tscn")
+	# Ajusta la ruta a tu menú principal real
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
 
-# --- Puntuación y efectos (sin cambios) ---
-func increase_score():
-	player_score += 1
-	update_score()
+# --- Eliminamos increase_score() porque ya no se usa ---
+# func increase_score(): ... (borrar)
 
-func update_score():
-	if score_label: score_label.text = "Score: " + str(player_score)
-
+# --- Efectos (sin cambios) ---
 func _on_mob_spawned(_mob):
 	pass
 

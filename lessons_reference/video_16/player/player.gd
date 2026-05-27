@@ -52,6 +52,14 @@ func _setup_touch_ui():
 		print("Botón de disparo conectado")
 	else:
 		print("Error: No se encontró el nodo 'ShootButton' o no es un TouchScreenButton")
+	
+	# Conectar botón de pausa (nodo "PauseButton")
+	var pause_btn = touch_ui.get_node("PauseButton")
+	if pause_btn:
+		pause_btn.connect("pressed", Callable(self, "_on_pause_pressed"))
+		print("Botón de pausa conectado")
+	else:
+		print("Error: No se encontró el nodo 'PauseButton'")
 
 # Señal del joystick (analogic_changed)
 func _on_joystick_moved(value: Vector2, _distance: float, _angle: float, _angle_cw: float, _angle_ccw: float):
@@ -85,7 +93,7 @@ func _physics_process(delta):
 	if is_dead:
 		return
 	
-	const SPEED = 5.5
+	const SPEED = 8.0
 	
 	# Movimiento: joystick en móvil, teclado en PC
 	var input_dir: Vector2
@@ -98,11 +106,11 @@ func _physics_process(delta):
 	var direction = transform.basis * move_3d
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
-	velocity.y -= 20.0 * delta
+	velocity.y -= 18.0 * delta
 	
 	# Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = 10.0
+		velocity.y = 12.0
 	elif Input.is_action_just_released("jump") and velocity.y > 0.0:
 		velocity.y = 0.0
 	
@@ -133,6 +141,16 @@ func recibir_daño(cantidad):
 		health_ui.value = vida
 	if vida <= 0:
 		morir()
+
+func _on_pause_pressed():
+	# Buscar el PausePanel en la escena principal (debe estar en un CanvasLayer)
+	var pause_panel = get_tree().current_scene.get_node("CanvasLayer/PausePanel")
+	if pause_panel:
+		pause_panel.visible = true
+		get_tree().paused = true
+		print("Juego pausado")
+	else:
+		print("Error: No se encontró 'CanvasLayer/PausePanel' en la escena principal")
 
 func morir():
 	if is_dead:

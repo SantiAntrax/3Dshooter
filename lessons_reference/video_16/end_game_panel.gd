@@ -16,4 +16,4 @@ func _on_menu_pressed():
 	menu_pressed.emit()
 
 func set_score(value: int):
-	$VBoxContainer/FinalScoreLabel.text = "Score: " + str(value)
+	$FinalScoreLabel.text = "Score: " + str(value)

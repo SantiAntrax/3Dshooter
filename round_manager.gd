@@ -12,10 +12,16 @@ signal round_message_hide
 # Señal para avisar a los spawners de un hueco libre
 signal spawn_slot_available
 
+# ✅ Señal para actualizar la puntuación en la UI
+signal score_updated(new_score: int)
+
 var current_round: int = 1
 var enemies_to_spawn: int = 0
 var enemies_alive: int = 0
 var is_between_rounds: bool = false
+
+# ✅ Variable de puntuación acumulada
+var current_score: int = 0
 
 # Control global de enemigos simultáneos
 var current_alive: int = 0
@@ -34,7 +40,7 @@ const AUTO_ADVANCE_TIME: float = 3.0
 # Parámetros de dificultad
 const BASE_ENEMIES = 9
 const ENEMY_INCREMENT = 15
-const MAX_ROUNDS = 10
+const MAX_ROUNDS = 5
 
 # Límite de enemigos simultáneos
 const BASE_MAX_ALIVE = 9
@@ -90,6 +96,7 @@ func reset_rounds():
 	enemies_to_spawn = 0
 	is_between_rounds = false
 	current_alive = 0
+	current_score = 0  # ✅ Reiniciar puntuación
 	if auto_advance_timer:
 		auto_advance_timer.stop()
 	round_label = null
@@ -97,7 +104,6 @@ func reset_rounds():
 	message_panel = null
 	message_label = null
 	next_button = null
-	# Los spawners se limpiarán al recargar la escena
 
 func start_new_round():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -122,6 +128,12 @@ func on_enemy_spawned():
 
 func on_enemy_died():
 	enemies_alive -= 1
+	# ✅ Sumar puntos y emitir señal
+	current_score += 100
+	score_updated.emit(current_score)
+	# ✅ (Opcional) mensaje de depuración
+	print("Enemigo muerto. Score actual: ", current_score)
+	
 	update_ui()
 	if enemies_alive <= 0 and not is_between_rounds:
 		_end_round()

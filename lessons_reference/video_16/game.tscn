@@ -2,15 +2,61 @@
 
 [ext_resource type="PackedScene" uid="uid://d3kp34dihjeyd" path="res://lessons_reference/video_16/player/player.tscn" id="1_fqdcw"]
 [ext_resource type="Script" uid="uid://bl4rvfo6g3wbf" path="res://lessons_reference/video_16/game.gd" id="1_xym6k"]
+[ext_resource type="Script" uid="uid://csjsc16g3k4ve" path="res://addons/vaporwavesky/vaporwave_sky_material.gd" id="3_6ve8k"]
+[ext_resource type="Shader" uid="uid://cgopfs5cvdqyg" path="res://addons/vaporwavesky/vaporwave.gdshader" id="4_a3pdk"]
 [ext_resource type="Material" uid="uid://spdpie6nlr1q" path="res://lessons_reference/video_16/level/bridges.tres" id="4_mc4jw"]
 [ext_resource type="PackedScene" uid="uid://xtl5acmpaa04" path="res://lessons_reference/video_16/mob/spawner_3d.tscn" id="5_7vlo8"]
 [ext_resource type="Material" uid="uid://cp4gi8r3s3twb" path="res://lessons_reference/video_16/level/platforms.tres" id="5_l41we"]
 [ext_resource type="Script" uid="uid://dstdc8ma58vqn" path="res://lessons_reference/video_16/pause_menu.gd" id="6_es74b"]
 [ext_resource type="Script" uid="uid://sgbahaffrfb2" path="res://lessons_reference/video_16/end_game_panel.gd" id="7_vsr84"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1p3ei"]
+shader = ExtResource("4_a3pdk")
+shader_parameter/sky_color = Color(0.1, 0.07, 0.2, 1)
+shader_parameter/sky_horizon_color = Color(0.56, 0.18, 0.42, 1)
+shader_parameter/sky_horizon_decay = 3.0
+shader_parameter/ground_color = Color(0, 0, 0, 1)
+shader_parameter/ground_horizon_color = Color(0.1, 0, 0.07, 1)
+shader_parameter/ground_horizon_decay = 1.0
+shader_parameter/stars_enabled = true
+shader_parameter/stars_below_horizon = false
+shader_parameter/star_color = Color(0.95, 0.9, 0.6, 1)
+shader_parameter/star_radius = 0.3
+shader_parameter/star_density = 5.0
+shader_parameter/star_randomness = 1.0
+shader_parameter/star_seed = Vector2(0, 0)
+shader_parameter/grid_enabled = true
+shader_parameter/grid_color = Color(0.18, 0.92, 0.74, 1)
+shader_parameter/grid_depth = 2.0
+shader_parameter/grid_spacing = 1.0
+shader_parameter/grid_thickness = 0.03
+shader_parameter/grid_max_distance = 25.0
+shader_parameter/grid_max_distance_fade = 0.3
+shader_parameter/grid_energy = 1.0
+shader_parameter/sun_radius = 10.0
+shader_parameter/sun_smoothing = 0.35
+shader_parameter/sun_glow_color = Color(0.96, 0.9, 0.35, 1)
+shader_parameter/sun_glow_radius = 30.0
+shader_parameter/sun_glow_intensity = 0.5
+shader_parameter/sun_gradient_enabled = true
+shader_parameter/sun_color_1 = Color(0.96, 0.9, 0.35, 1)
+shader_parameter/sun_color_2 = Color(0.96, 0.35, 0.9, 1)
+shader_parameter/sun_gradient_pos_frac = 0.6
+shader_parameter/sun_gradient_span_frac = 0.8
+shader_parameter/sun_banding_enabled = true
+shader_parameter/sun_banding_base_gap = 0.03
+shader_parameter/sun_banding_gap_mul = 1.1
+shader_parameter/sun_banding_stop_height = 0.7
+shader_parameter/sun_banding_thickness = 0.01
+script = ExtResource("3_6ve8k")
+metadata/_custom_type_script = "uid://csjsc16g3k4ve"
+
+[sub_resource type="Sky" id="Sky_f68rl"]
+sky_material = SubResource("ShaderMaterial_1p3ei")
+
 [sub_resource type="Environment" id="Environment_pev5d"]
-background_mode = 1
 background_color = Color(0, 0.807843, 1, 1)
+sky = SubResource("Sky_f68rl")
 ambient_light_source = 2
 ambient_light_color = Color(0.815625, 0.702063, 0.54125, 1)
 ambient_light_sky_contribution = 0.31
@@ -31,31 +77,47 @@ volumetric_fog_emission = Color(0.0431373, 0.0431373, 0.0431373, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xiq5r"]
 
+[sub_resource type="FontVariation" id="FontVariation_vsr84"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_a3pdk"]
-font_size = 35
+font = SubResource("FontVariation_vsr84")
+font_size = 50
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_xe0c4"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_1p3ei"]
+font_size = 90
+
 [sub_resource type="LabelSettings" id="LabelSettings_es74b"]
 font_size = 120
+outline_size = 37
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_vsr84"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3wpyi"]
 font = SubResource("SystemFont_vsr84")
 font_size = 53
+outline_size = 19
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vsr84"]
 font_size = 120
+outline_size = 29
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ve8k"]
 font_size = 53
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node3D" unique_id=1776634138]
 script = ExtResource("1_xym6k")
 
 [node name="Platform8" type="CSGBox3D" parent="." unique_id=1598536934]
-transform = Transform3D(1.0000008, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999991, -8.811, -4.774, 35)
+transform = Transform3D(1.0000008, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999991, -9, -5, 35)
 use_collision = true
 size = Vector3(6, 11, 14)
 material = ExtResource("5_l41we")
@@ -65,17 +127,9 @@ environment = SubResource("Environment_pev5d")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=624613574]
 transform = Transform3D(0.707107, -0.612373, 0.353553, 0, 0.5, 0.866026, -0.707107, -0.612373, 0.353553, 0, 5, 0)
+light_energy = 0.2
 shadow_enabled = true
 directional_shadow_max_distance = 40.0
-
-[node name="Label" type="Label" parent="." unique_id=276935121]
-unique_name_in_owner = true
-offset_left = 17.0
-offset_top = 15.0
-offset_right = 245.0
-offset_bottom = 101.0
-theme_override_font_sizes/font_size = 60
-text = "Score: 0"
 
 [node name="Player" parent="." unique_id=1151325753 instance=ExtResource("1_fqdcw")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7, 0.507239, -7.5)
@@ -93,7 +147,7 @@ shape = SubResource("WorldBoundaryShape3D_xiq5r")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12224, 0.5, 11.3959)
 
 [node name="MobSpawner3D2" parent="." unique_id=1763726273 instance=ExtResource("5_7vlo8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.63219, 0.94894505, 39.60929)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.96595, 0.94894505, 45.538715)
 
 [node name="MobSpawner3D3" parent="." unique_id=1702535751 instance=ExtResource("5_7vlo8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7262, 0.5, -7.19963)
@@ -128,6 +182,18 @@ use_collision = true
 size = Vector3(13, 11, 8)
 material = ExtResource("5_l41we")
 
+[node name="Platform10" type="CSGBox3D" parent="." unique_id=1460624567]
+transform = Transform3D(-4.3711385e-08, 0, 0.9999999, 0, 0.99999833, 0, -0.9999999, 0, -4.3711385e-08, 14.5, -5, 45)
+use_collision = true
+size = Vector3(6, 11, 25.324707)
+material = ExtResource("5_l41we")
+
+[node name="Platform9" type="CSGBox3D" parent="." unique_id=497266255]
+transform = Transform3D(-4.3711463e-08, 0, 0.9999982, 0, 0.99999917, 0, -1.0000017, 0, -4.371131e-08, -5, -5, 45)
+use_collision = true
+size = Vector3(6, 11, 14)
+material = ExtResource("5_l41we")
+
 [node name="Platform3" type="CSGBox3D" parent="." unique_id=1150253212]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -5, -7)
 use_collision = true
@@ -135,25 +201,13 @@ size = Vector3(6, 11, 8)
 material = ExtResource("5_l41we")
 
 [node name="Platform4" type="CSGBox3D" parent="." unique_id=662807008]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -5, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.358826, -5, 7)
 use_collision = true
-size = Vector3(6, 11, 14)
+size = Vector3(40, 11, 14)
 material = ExtResource("5_l41we")
 
-[node name="Platform7" type="CSGBox3D" parent="." unique_id=1489783234]
-transform = Transform3D(0.9999939, -0.003490651, 0, 0.0034906515, 0.9999938, 0, 0, 0, 0.9999999, -9.077819, -5.039, 21.289)
-use_collision = true
-size = Vector3(6, 11, 14)
-material = ExtResource("5_l41we")
-
-[node name="Platform8" type="CSGBox3D" parent="Platform7" unique_id=1705640775]
-transform = Transform3D(-4.370972e-08, -3.8144887e-10, 1.0000001, -0.008726534, 0.9999616, 0, -0.99996185, -0.008726533, -4.3711392e-08, 10.091246, 0.3978424, 17.906538)
-use_collision = true
-size = Vector3(6, 11, 14)
-material = ExtResource("5_l41we")
-
-[node name="Platform7" type="CSGBox3D" parent="Platform7/Platform8" unique_id=2015513135]
-transform = Transform3D(0.9998164, 0, 0.01919743, 0, 0.99999964, 0, -0.019197457, 0, 0.999815, 0, 0, 14)
+[node name="Platform7" type="CSGBox3D" parent="." unique_id=1901898546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -5, 21)
 use_collision = true
 size = Vector3(6, 11, 14)
 material = ExtResource("5_l41we")
@@ -190,18 +244,20 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="EnemiesRemainingLabel" type="Label" parent="CanvasLayer" unique_id=1875105040]
-offset_top = 17.0
-offset_right = 93.0
-offset_bottom = 40.0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 113.0
+offset_bottom = 63.0
+scale = Vector2(2, 2)
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=2146337979]
 anchors_preset = -1
 anchor_right = 0.015000001
 anchor_bottom = 0.044000003
-offset_left = 33.0
-offset_top = 114.0
-offset_right = 148.2
-offset_bottom = 135.48
+offset_left = 827.0
+offset_top = 30.0
+offset_right = 942.2
+offset_bottom = 51.479996
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_a3pdk")
 
@@ -246,30 +302,42 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_es74b")
 
+[node name="Label" type="Label" parent="CanvasLayer/PausePanel" unique_id=1518100759]
+process_mode = 3
+layout_mode = 0
+offset_left = 626.0
+offset_top = 177.0
+offset_right = 1324.0
+offset_bottom = 301.0
+text = "Pausa"
+label_settings = SubResource("LabelSettings_1p3ei")
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PausePanel" unique_id=316165077]
 process_mode = 3
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=1518100759]
-process_mode = 3
-layout_mode = 2
-text = "Pausa"
+offset_left = 617.0
+offset_top = 379.0
+offset_right = 1315.0
+offset_bottom = 758.0
+alignment = 1
 
 [node name="Reanudar" type="Button" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=2002728074]
 process_mode = 3
 layout_mode = 2
+size_flags_vertical = 3
 text = "Reanudar"
 
 [node name="Reiniciar" type="Button" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=2026152045]
 process_mode = 3
 layout_mode = 2
+size_flags_vertical = 3
 text = "Reiniciar"
 
 [node name="SalirMenu" type="Button" parent="CanvasLayer/PausePanel/VBoxContainer" unique_id=1381333196]
 process_mode = 3
 layout_mode = 2
+size_flags_vertical = 3
 text = "Salir Al Menu
 "
 
@@ -283,38 +351,52 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_vsr84")
 
+[node name="Label" type="Label" parent="CanvasLayer/GameOverPanel" unique_id=1877808819]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 193.0
+offset_right = 1908.0
+offset_bottom = 358.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_es74b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/GameOverPanel" unique_id=816060218]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 133.0
+offset_right = 1908.0
+offset_bottom = 358.0
+text = "Score: 0
+"
+label_settings = SubResource("LabelSettings_3wpyi")
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverPanel" unique_id=1273199869]
 layout_direction = 4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 510.0
+offset_top = 492.0
+offset_right = -511.0
+offset_bottom = -280.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1877808819]
-layout_mode = 2
-text = "GAME OVER"
-label_settings = SubResource("LabelSettings_es74b")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=816060218]
-layout_mode = 2
-text = "Score: 0
-"
-label_settings = SubResource("LabelSettings_3wpyi")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="RetryButton" type="Button" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1270958088]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Reintentar
 "
 
 [node name="MenuButton" type="Button" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1705374127]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Menu Principal
 "
 
@@ -324,88 +406,112 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_vsr84")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VictoryPanel" unique_id=165369498]
-layout_direction = 1
+[node name="Label" type="Label" parent="CanvasLayer/VictoryPanel" unique_id=262019890]
 layout_mode = 0
-offset_right = 1914.0
-offset_bottom = 1075.0
-alignment = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=262019890]
-layout_mode = 2
+offset_left = 8.0
+offset_top = 290.0
+offset_right = 1922.0
+offset_bottom = 455.0
 text = "¡VICTORIA!"
 label_settings = SubResource("LabelSettings_vsr84")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=1473197728]
-layout_mode = 2
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/VictoryPanel" unique_id=1473197728]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 221.0
+offset_right = 1922.0
+offset_bottom = 294.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_6ve8k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VictoryPanel" unique_id=165369498]
+layout_direction = 1
+layout_mode = 0
+offset_left = 632.0
+offset_top = 583.0
+offset_right = 1296.0
+offset_bottom = 800.0
+alignment = 1
+
 [node name="RetryButton" type="Button" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=1721027899]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Jugar De Nuevo
 "
 
 [node name="MenuButton" type="Button" parent="CanvasLayer/VictoryPanel/VBoxContainer" unique_id=1787534075]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Menu Principal"
 
 [node name="Bridge5" type="CSGBox3D" parent="." unique_id=1576969543]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 7.7152348, 0, 16.449738)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 7.7153897, 9.536743e-07, 16.481556)
 use_collision = true
 size = Vector3(5, 1, 3)
 material = ExtResource("4_mc4jw")
 
-[node name="Bridge7" type="CSGBox3D" parent="Bridge5" unique_id=887992530]
-transform = Transform3D(-8.347416e-08, 0, 1, 0, 1, 0, -1, 0, -8.347416e-08, 17.884773, 0, 4.350322)
+[node name="Bridge10" type="CSGBox3D" parent="Bridge5" unique_id=1003024529]
+transform = Transform3D(-1, 0, -2.384976e-08, 0, 1, 0, 2.384976e-08, 0, -1, 12.4, 0, -37.077)
 use_collision = true
-size = Vector3(5, 1, 3)
+size = Vector3(29.416626, 1, 3)
 material = ExtResource("4_mc4jw")
 
-[node name="Bridge4" type="CSGBox3D" parent="Bridge5" unique_id=1234010038]
-transform = Transform3D(1, 0, 9.5399045e-08, 0, 1, 0, -9.5399045e-08, 0, 1, 18.667301, 0, 0.33655977)
-use_collision = true
-size = Vector3(5, 1, 3)
-material = ExtResource("4_mc4jw")
-
-[node name="Bridge3" type="CSGBox3D" parent="Bridge5" unique_id=1323440473]
-transform = Transform3D(-1, 0, -2.384976e-08, 0, 1, 0, 2.384976e-08, 0, -1, 5.20212, 0, 5.1328497)
-use_collision = true
-size = Vector3(5, 1, 3)
-material = ExtResource("4_mc4jw")
-
-[node name="Bridge2" type="CSGBox3D" parent="Bridge5" unique_id=1266747276]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 4.2152348, 0, 1.0658183)
+[node name="Bridge9" type="CSGBox3D" parent="Bridge5" unique_id=1365971593]
+transform = Transform3D(1, 0, 4.7699515e-08, 0, 1, 0, -4.7699515e-08, 0, 1, 9.999195, 0, -0.03749132)
 use_collision = true
 size = Vector3(5, 1, 3)
 material = ExtResource("4_mc4jw")
 
 [node name="Bridge5" type="CSGBox3D" parent="Bridge5" unique_id=2014783112]
-transform = Transform3D(-3.577464e-08, 0, 1, 0, 1, 0, -1, 0, -3.577464e-08, 8.700455, 0, 4.1336555)
+transform = Transform3D(-3.577464e-08, 0, 1, 0, 1, 0, -1, 0, -3.577464e-08, 9, 0, 4)
 use_collision = true
 size = Vector3(5, 1, 3)
 material = ExtResource("4_mc4jw")
 
-[node name="Bridge2" type="CSGBox3D" parent="Bridge5/Bridge5" unique_id=1365971593]
-transform = Transform3D(1.1924879e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924879e-08, 4.037492, 0, 0.9991951)
+[node name="Bridge8" type="CSGBox3D" parent="Bridge5" unique_id=1875980433]
+transform = Transform3D(-1, 0, -7.154928e-08, 0, 1, 0, 7.154928e-08, 0, -1, 15, 0, 5)
+use_collision = true
+size = Vector3(5, 1, 3)
+material = ExtResource("4_mc4jw")
+
+[node name="Bridge7" type="CSGBox3D" parent="Bridge5" unique_id=887992530]
+transform = Transform3D(-8.347416e-08, 0, 1, 0, 1, 0, -1, 0, -8.347416e-08, 19, 0, 4)
 use_collision = true
 size = Vector3(5, 1, 3)
 material = ExtResource("4_mc4jw")
 
 [node name="Bridge6" type="CSGBox3D" parent="Bridge5" unique_id=1088446296]
-transform = Transform3D(5.96244e-08, 0, -1, 0, 1, 0, 1, 0, 5.96244e-08, 13.737141, 0, 1.0953593)
+transform = Transform3D(5.96244e-08, 0, -1, 0, 1, 0, 1, 0, 5.96244e-08, 14, 0, 1)
 use_collision = true
 size = Vector3(5, 1, 3)
 material = ExtResource("4_mc4jw")
 
-[node name="Bridge2" type="CSGBox3D" parent="Bridge5/Bridge6" unique_id=1875980433]
-transform = Transform3D(1.1924882e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924882e-08, 4.037492, 0, -0.7208328)
+[node name="Bridge4" type="CSGBox3D" parent="Bridge5" unique_id=1234010038]
+transform = Transform3D(1, 0, 9.5399045e-08, 0, 1, 0, -9.5399045e-08, 0, 1, 21.5, 0, 0)
+use_collision = true
+size = Vector3(8, 1, 3)
+material = ExtResource("4_mc4jw")
+
+[node name="Bridge3" type="CSGBox3D" parent="Bridge5" unique_id=1323440473]
+transform = Transform3D(-1, 0, -2.384976e-08, 0, 1, 0, 2.384976e-08, 0, -1, 5, 0, 5)
 use_collision = true
 size = Vector3(5, 1, 3)
+material = ExtResource("4_mc4jw")
+
+[node name="Bridge2" type="CSGBox3D" parent="Bridge5" unique_id=1266747276]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 4, 0, 1)
+use_collision = true
+size = Vector3(5, 1, 3)
+material = ExtResource("4_mc4jw")
+
+[node name="Bridge11" type="CSGBox3D" parent="Bridge5" unique_id=1691652781]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 28.5, 0, -29)
+use_collision = true
+size = Vector3(19.276367, 1, 3)
 material = ExtResource("4_mc4jw")
 
 [connection signal="body_entered" from="KillPlane" to="." method="_on_kill_plane_body_entered"]

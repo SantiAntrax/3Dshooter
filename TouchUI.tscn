@@ -1,34 +1,92 @@
 [gd_scene format=3 uid="uid://dypdsxsqyww1p"]
 
-[ext_resource type="Script" uid="uid://dleaelflrux4t" path="res://addons/virtual_joystick_plus/virtual_joystick_plus.gd" id="2_obgiq"]
-[ext_resource type="Texture2D" uid="uid://bdxeumao4chwu" path="res://addons/virtual_joystick_plus/resources/textures/joystick_texture_5.png" id="3_4q7fs"]
-[ext_resource type="Texture2D" uid="uid://cl5yq7xkjara8" path="res://addons/virtual_joystick_plus/resources/textures/stick_texture_5.png" id="4_c48ad"]
+[ext_resource type="Script" uid="uid://dleaelflrux4t" path="res://addons/virtual_joystick_plus/virtual_joystick_plus.gd" id="1_lsxm1"]
+[ext_resource type="Texture2D" uid="uid://bdxeumao4chwu" path="res://addons/virtual_joystick_plus/resources/textures/joystick_texture_5.png" id="2_obgiq"]
+[ext_resource type="Texture2D" uid="uid://cl5yq7xkjara8" path="res://addons/virtual_joystick_plus/resources/textures/stick_texture_5.png" id="3_4q7fs"]
+[ext_resource type="Texture2D" uid="uid://bgkvuxeu8s3wf" path="res://icon.png" id="4_4q7fs"]
+[ext_resource type="Texture2D" uid="uid://cf7f7fcx7nmk5" path="res://389-3897478_icon-free-download-png-shoot-button-bullet-png.png" id="5_c48ad"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_lsxm1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsxm1"]
+radius = 147.55
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_obgiq"]
-radius = 0.7
+[sub_resource type="CircleShape2D" id="CircleShape2D_sy7nt"]
+radius = 520.43
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_obgiq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4q7fs"]
+font_size = 54
+outline_size = 10
+outline_color = Color(0.6117647, 0.09019608, 0.6117647, 1)
 
 [node name="TouchUI" type="CanvasLayer" unique_id=773813302]
 
-[node name="ShootButton" type="TouchScreenButton" parent="." unique_id=217266957]
-position = Vector2(1559, 746)
-scale = Vector2(136.99998, 129.00008)
-texture_normal = SubResource("CanvasTexture_lsxm1")
-shape = SubResource("CircleShape2D_obgiq")
-visibility_mode = 1
+[node name="ScoreLabel" type="Label" parent="." unique_id=1442620922]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 83.0
 
-[node name="VirtualJoystick" type="Control" parent="." unique_id=617243506]
+[node name="WaveLabel" type="Label" parent="." unique_id=1946889583]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 60.0
+offset_right = -80.0
+offset_bottom = 83.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+
+[node name="WaveMessage" type="Label" parent="." unique_id=1799206869]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="VirtualJoystick" type="Control" parent="." unique_id=1135127909]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 3
 anchors_preset = 0
-offset_left = 124.0
-offset_top = 646.0
-offset_right = 424.0
-offset_bottom = 946.0
+offset_left = 157.0
+offset_top = 616.0
+offset_right = 457.0
+offset_bottom = 916.0
 pivot_offset = Vector2(150, 150)
-script = ExtResource("2_obgiq")
-joystick_mode = 1
-joystick_texture = ExtResource("3_4q7fs")
-stick_texture = ExtResource("4_c48ad")
+script = ExtResource("1_lsxm1")
+joystick_texture = ExtResource("2_obgiq")
+stick_texture = ExtResource("3_4q7fs")
 metadata/_custom_type_script = "uid://dleaelflrux4t"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="." unique_id=303463450]
+position = Vector2(1751.0001, 515)
+scale = Vector2(-0.36774847, 0.2960944)
+texture_normal = ExtResource("4_4q7fs")
+shape = SubResource("CircleShape2D_lsxm1")
+action = "jump"
+
+[node name="ShootButton" type="TouchScreenButton" parent="." unique_id=217266957]
+position = Vector2(1498.9999, 669)
+scale = Vector2(0.16395348, 0.14555554)
+texture_normal = ExtResource("5_c48ad")
+shape = SubResource("CircleShape2D_sy7nt")
+action = "shoot"
+visibility_mode = 1
+
+[node name="PauseButton" type="TouchScreenButton" parent="." unique_id=1502245709]
+position = Vector2(1728, 38.000004)
+scale = Vector2(168.00005, 90.99999)
+texture_normal = SubResource("CanvasTexture_obgiq")
+visibility_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=636425176]
+self_modulate = Color(0, 0, 0, 1)
+top_level = true
+offset_left = 1727.0
+offset_top = 39.0
+offset_right = 1896.0
+offset_bottom = 129.0
+text = "Pausa
+"
+label_settings = SubResource("LabelSettings_4q7fs")
+horizontal_alignment = 1
+vertical_alignment = 1

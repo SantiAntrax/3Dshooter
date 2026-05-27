@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bv3jltj3o05ny" path="res://lessons_reference/video_16/mob/mob.gd" id="1_ebh3x"]
 [ext_resource type="PackedScene" uid="uid://12e7gwo50sef" path="res://lessons_reference/video_16/mob/bat/bat_model.tscn" id="2_5vr7j"]
-[ext_resource type="AudioStream" uid="uid://bec5opkuf77c7" path="res://mob/mob_take_damage.wav" id="3_sikhy"]
-[ext_resource type="AudioStream" uid="uid://ha0bp3cygkq1" path="res://mob/mob_ko.wav" id="4_qnk8k"]
+[ext_resource type="AudioStream" uid="uid://fjog33kmau05" path="res://mob/mob_take_damage.wav" id="3_sikhy"]
+[ext_resource type="AudioStream" uid="uid://cin3ukginmk36" path="res://mob/mob_ko.wav" id="4_qnk8k"]
 [ext_resource type="Script" uid="uid://dacsjhcf6myy6" path="res://lessons_reference/video_16/mob/enemy_state.gd" id="5_xdhm4"]
 [ext_resource type="Script" uid="uid://di7ikoxamf30w" path="res://lessons_reference/video_16/mob/idle_state.gd" id="6_drcv1"]
 [ext_resource type="Script" uid="uid://dlbgejaxrw03d" path="res://lessons_reference/video_16/mob/chase_state.gd" id="6_hccxo"]
@@ -16,7 +16,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_76gk6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hccxo"]
-radius = 12.0
+radius = 99.955
 
 [node name="Mob" type="RigidBody3D" unique_id=1434403069]
 top_level = true

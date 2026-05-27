@@ -28,7 +28,7 @@ var original_material: Material = null
 
 const ATTACK_DAMAGE: int = 10
 const ATTACK_COOLDOWN: float = 1.0
-const SIGHT_RANGE: float = 12.0
+const SIGHT_RANGE: float = 250.0
 const ATTACK_RANGE: float = 2.5
 const REACTION_DELAY: float = 0.3
 

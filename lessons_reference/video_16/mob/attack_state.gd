@@ -1,10 +1,8 @@
 extends EnemyState
 
-
 func enter() -> void:
 	# Detenerse para atacar
 	enemy.linear_velocity = Vector3.ZERO
-
 
 func physics_update(_delta: float) -> void:
 	var player = enemy.get_player()
@@ -23,7 +21,6 @@ func physics_update(_delta: float) -> void:
 	# Intentar atacar si el cooldown lo permite
 	if enemy.can_attack and enemy.attack_cooldown_timer.is_stopped():
 		enemy.try_attack()
-
 
 func _face_player() -> void:
 	var player = enemy.get_player()

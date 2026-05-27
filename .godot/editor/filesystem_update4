@@ -1,6 +1,7 @@
-res://TouchUI.tscn
+res://lessons_reference/video_16/game.tscn
 res://player/projectile/projectile.gdshader
 res://level/sky.gdshader
-res://lessons_reference/video_16/player/player.gd
-res://lessons_reference/video_16/player/player.tscn
-res://lessons_reference/challenges/player_health_bar.tscn
+res://round_manager.gd
+res://lessons_reference/video_16/game.gd
+res://lessons_reference/video_16/mob/mob.tscn
+res://lessons_reference/video_16/end_game_panel.gd
